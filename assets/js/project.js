@@ -140,3 +140,38 @@ function getMovie() {
         moviesHolder.appendChild(movie);
     }
 };
+
+$(document).on("click", "#btn-i", function (event) {
+
+    event.preventDefault();
+    getRecipe();
+});
+
+
+function getRecipe() {
+    let api = "https://www.themealdb.com/api/json/v1/1/random.php"
+     fetch(api)
+     .then(function(response){
+        return response.json()
+    }).then(function(data){
+        console.log(data);
+        displayRecipe(data);
+   }).catch(function(error){
+      console.log(error)
+    })
+   };
+
+function displayRecipe(data) {
+    var recipeHolder = document.createElement("div");
+    document.querySelector(".restaurants").appendChild(recipeHolder);
+    var name = document.createElement("p");
+    name.textContent = data.meals[0].strMeal
+    recipeHolder.appendChild(name);
+    var image = document.createElement("img");
+    image.setAttribute("src", data.meals[0].strMealThumb)
+    recipeHolder.appendChild(image);
+    var link = document.createElement("a");
+    link.textContent = data.meals[0].strSource;
+    link.setAttribute("href", data.meals[0].strSource);
+    recipeHolder.appendChild(link);
+}
