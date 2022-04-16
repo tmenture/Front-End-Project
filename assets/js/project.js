@@ -1,8 +1,8 @@
-var userZipCode = document.getElementById("zip-code").value;
-
+var userZipCode = $("#zip-code").val();
+   
 var callApi = function () {
 
-             fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R&&postalCode=' + userZipCode + '&&radius=15&&unit=miles')
+             fetch('https://app.ticketmaster.com/discovery/v2/events.json?countryCode=US&apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R&&postalCode='+ userZipCode +'&&radius=15&&unit=miles')
 
                 .then((response) => {
 
