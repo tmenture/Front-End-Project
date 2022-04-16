@@ -1,10 +1,27 @@
 //var userZipCode = document.getElementById("zip-code").value;
 var lat = "";
 var lon = "";
+var theDate = moment().format("YYYY-MM-DD");
+console.log(theDate);
+
+function getLocation () {
+    var userZipCode = document.getElementById("zip-code").value;
+    console.log(userZipCode)
+   // callApi(userZipCode);
+   getWeather(userZipCode);
+    getMovie(userZipCode);
+};
+
+$(document).on("click", "#btn-t", function (event) {
+
+    event.preventDefault();
+    getLocation()
+    //callApi();
+});
 
 var callApi = function (userZipCode) {
 
-             fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R&&postalCode=' + userZipCode + '&&radius=15&&unit=miles')
+             fetch("https://app.ticketmaster.com/discovery/v2/events.json?apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R&&postalCode=" + userZipCode + "&&countryCode=us&&radius=15&&unit=miles")
 
                 .then((response) => {
 
@@ -51,24 +68,16 @@ var displayData = function (data) {
 
 };
 
-$(document).on("click", "#btn-t", function (event) {
-
-    event.preventDefault();
-    getLocation()
-    //callApi();
-   // getWeather();
-   // getMovie();
-});
-
-function getWeather() {
-    let api = "https://api.openweathermap.org/data/2.5/weather?zip=08094,us&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
+function getWeather(userZipCode) {
+    let api = "https://api.openweathermap.org/data/2.5/weather?zip="+ userZipCode +",us&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
+    console.log(api)
      fetch(api)
-     .then(function(response){
-        return response.json()
-    }).then(function(data){
-        console.log(data);
-        displayWeather(data);
-   }).catch(function(error){
+    .then(function(response){
+       return response.json()
+   }).then(function(data){
+       console.log(data);
+     displayWeather(data);
+  }).catch(function(error){
       console.log(error)
     })
    };
@@ -119,8 +128,8 @@ function displayPlaces (data) {
     }
 };
 
-function getMovie() {
-    let api = "http://data.tmsapi.com/v1.1/movies/showings?startDate=2022-04-15&zip=08094&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
+   function getMovie(userZipCode) {
+    let api = "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +theDate+ "&zip="+ userZipCode +"&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
      fetch(api)
      .then(function(response){
         return response.json()
@@ -176,9 +185,3 @@ function displayRecipe(data) {
     link.setAttribute("href", data.meals[0].strSource);
     recipeHolder.appendChild(link);
 }
-
-function getLocation () {
-    var userZipCode = document.getElementById("zip-code").value;
-    console.log(userZipCode)
-    callApi(userZipCode);
-};
