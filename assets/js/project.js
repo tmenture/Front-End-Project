@@ -1,10 +1,9 @@
-//var userZipCode = document.getElementById("zip-code").value;
 var lat = "";
 var lon = "";
 
 var callApi = function (userZipCode) {
 
-             fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R&&postalCode=' + userZipCode + '&&radius=15&&unit=miles')
+             fetch('https://app.ticketmaster.com/discovery/v2/events.json?postalCode=' + userZipCode + "&radius=50&unit=miles&apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R")
 
                 .then((response) => {
 
@@ -23,7 +22,7 @@ var callApi = function (userZipCode) {
 
                 console.log(data);
 
-                //displayData(data);
+                displayData(data);
 
             })
 
@@ -53,9 +52,7 @@ var displayData = function (data) {
 
 $(document).on("click", "#btn-t", function (event) {
 
-    event.preventDefault();
-    getLocation()
-    //callApi();
+    getLocation();
    // getWeather();
    // getMovie();
 });
