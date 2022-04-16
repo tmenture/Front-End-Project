@@ -1,8 +1,8 @@
-var userZipCode = document.getElementById("zip-code").value;
+//var userZipCode = document.getElementById("zip-code").value;
 var lat = "";
 var lon = "";
 
-var callApi = function () {
+var callApi = function (userZipCode) {
 
              fetch('https://app.ticketmaster.com/discovery/v2/events.json?apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R&&postalCode=' + userZipCode + '&&radius=15&&unit=miles')
 
@@ -23,7 +23,7 @@ var callApi = function () {
 
                 console.log(data);
 
-                displayData(data);
+                //displayData(data);
 
             })
 
@@ -54,9 +54,10 @@ var displayData = function (data) {
 $(document).on("click", "#btn-t", function (event) {
 
     event.preventDefault();
-    callApi();
-    getWeather();
-    getMovie();
+    getLocation()
+    //callApi();
+   // getWeather();
+   // getMovie();
 });
 
 function getWeather() {
@@ -175,3 +176,9 @@ function displayRecipe(data) {
     link.setAttribute("href", data.meals[0].strSource);
     recipeHolder.appendChild(link);
 }
+
+function getLocation () {
+    var userZipCode = document.getElementById("zip-code").value;
+    console.log(userZipCode)
+    callApi(userZipCode);
+};
