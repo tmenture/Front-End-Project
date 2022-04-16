@@ -41,9 +41,12 @@
                 <div class="column is-12 is-6-desktop mx-auto has-text-centered">
                     <h2 class="mb-4 is-size-1 is-size-3-mobile has-text-weight-bold">Search Party</h2>
                     <p class="subtitle has-text-grey mb-5">Enlist search party to track down plans and recover your night!</p>
+                    <textarea id="zip-code" placeholder="Enter Your Zip Code"></textarea>
+                    <button class="button is-primary is-medium " id="btn-t">Find Things to Do</button>
                 </div>
             </div>
 
+            <div class="weather"> </div>
             <div class="columns is-multiline">
                 <div class="column is-12 is-4-desktop">
 
@@ -51,15 +54,14 @@
                     <div class="ml-3">
                       <h4 class="is-size-4 has-text-weight-bold mb-2">TicketMaster</h4>
                       <p class="subtitle has-text-grey">Use TicketMaster to locate events near you.</p>
-                      <button class="button is-primary is-medium ">Tickets</button>
+                      <button class="button is-primary is-medium " id="btn-t">Tickets</button>
+                      <div id="fetch-container"></div>
                     </div>
                   </div>
 
                   <div class="mb-6 is-flex">
                     <div class="ml-3">
-                      <h4 class="is-size-4 has-text-weight-bold mb-2">Google Maps</h4>
-                      <p class="subtitle has-text-grey">Use Google Maps to pick a bar or restaurant to enjoy before or after the show.</p>
-                      <button class="button is-primary is-medium ">Find Spots</button>
+                      <h4 class="restaurants is-size-4 has-text-weight-bold mb-2">Restaurants</h4>
                     </div>
                   </div>
 
@@ -67,7 +69,7 @@
                     <div class="ml-3">
                       <h4 class="is-size-4 has-text-weight-bold mb-2">Google Calendar</h4>
                       <p class="subtitle has-text-grey">Use Google Calendar to remember and share the event.</p>
-                      <button class="button is-primary is-medium ">Share</button>
+                      <button class="button is-primary is-medium " id="btn-s">Share</button>
                     </div>
                   </div>
 
