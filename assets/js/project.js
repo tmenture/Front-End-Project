@@ -54,10 +54,9 @@ var displayData = function (data) {
 $(document).on("click", "#btn-t", function (event) {
 
     event.preventDefault();
-
     callApi();
-    getWeather()
-
+    getWeather();
+    getMovie();
 });
 
 function getWeather() {
@@ -116,5 +115,28 @@ function displayPlaces (data) {
         var name = document.createElement("p");
         name.textContent = data.results[i].poi.name
         placesHolder.appendChild(name);
+    }
+};
+
+function getMovie() {
+    let api = "http://data.tmsapi.com/v1.1/movies/showings?startDate=2022-04-15&zip=08094&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
+     fetch(api)
+     .then(function(response){
+        return response.json()
+    }).then(function(data){
+        console.log(data);
+        displayMovies(data);
+   }).catch(function(error){
+      console.log(error)
+    })
+   };
+
+   function displayMovies (data) {
+    var moviesHolder = document.createElement("div");
+    document.querySelector(".movie").appendChild(moviesHolder);
+    for ( i = 0; i < data.length; i++) {
+        var movie = document.createElement("p");
+        movie.textContent = data[i].title
+        moviesHolder.appendChild(movie);
     }
 };
