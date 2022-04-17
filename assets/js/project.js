@@ -52,23 +52,26 @@ var callApi = function (userZipCode) {
 
 var displayData = function (data) {
 
-    if (data !== null) {
-        alert("No events near you, please try another zip code")
-    };
+    if (!data._embedded) {
 
-    for (var i = 0; i < data._embedded.events.length; i++) {
+        alert("No events near you, please try another zip code");
 
-        const eventEl = data._embedded.events[i];
+    } else {
 
-        const eventElDiv = document.getElementById("fetch-container");
+        for (var i = 0; i < data._embedded.events.length; i++) {
 
-        const event = eventEl.name;
+            const eventEl = data._embedded.events[i];
 
-        const header = document.createElement("h1");
+            const eventElDiv = document.getElementById("fetch-container");
 
-        header.innerHTML = event;
+            const event = eventEl.name;
 
-        eventElDiv.appendChild(header);
+            const header = document.createElement("h1");
+
+            header.innerHTML = event;
+
+            eventElDiv.appendChild(header);
+        };
 
     };
 
