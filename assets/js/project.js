@@ -3,19 +3,22 @@ var lon = "";
 var theDate = moment().format("YYYY-MM-DD");
 console.log(theDate);
 
-function getLocation () {
+function getUserLocation () {
     var userZipCode = document.getElementById("zip-code").value;
-    console.log(userZipCode)
-   // callApi(userZipCode);
-   getWeather(userZipCode);
+    console.log("log Begin");
+    console.log(userZipCode);
+    callApi(userZipCode);
+    console.log("getWeather");
+    getWeather(userZipCode);
+    console.log("getMovie");
     getMovie(userZipCode);
+
 };
 
 $(document).on("click", "#btn-t", function (event) {
 
-    event.preventDefault();
-    getLocation()
-    //callApi();
+    getUserLocation();
+
 });
 
 var callApi = function (userZipCode) {
@@ -49,6 +52,10 @@ var callApi = function (userZipCode) {
 
 var displayData = function (data) {
 
+    if (data !== null) {
+        alert("No events near you, please try another zip code")
+    };
+
     for (var i = 0; i < data._embedded.events.length; i++) {
 
         const eventEl = data._embedded.events[i];
@@ -67,15 +74,6 @@ var displayData = function (data) {
 
 };
 
-$(document).on("click", "#btn-t", function (event) {
-
-    getLocation();
-   // getWeather();
-   // getMovie();
-});
-
-function getWeather() {
-    let api = "https://api.openweathermap.org/data/2.5/weather?zip=08094,us&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
 function getWeather(userZipCode) {
     let api = "https://api.openweathermap.org/data/2.5/weather?zip="+ userZipCode +",us&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
     console.log(api)
@@ -88,7 +86,7 @@ function getWeather(userZipCode) {
   }).catch(function(error){
       console.log(error)
     })
-   };
+};
 
 function displayWeather (data) {
     lat = parseFloat(data.coord.lat);
@@ -136,10 +134,10 @@ function displayPlaces (data) {
     }
 };
 
-   function getMovie(userZipCode) {
+function getMovie(userZipCode) {
     let api = "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +theDate+ "&zip="+ userZipCode +"&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
-     fetch(api)
-     .then(function(response){
+    fetch(api)
+    .then(function(response){
         return response.json()
     }).then(function(data){
         console.log(data);
@@ -147,9 +145,9 @@ function displayPlaces (data) {
    }).catch(function(error){
       console.log(error)
     })
-   };
+};
 
-   function displayMovies (data) {
+function displayMovies (data) {
     var moviesHolder = document.createElement("div");
     document.querySelector(".movie").appendChild(moviesHolder);
     for ( i = 0; i < data.length; i++) {
@@ -177,19 +175,19 @@ function getRecipe() {
    }).catch(function(error){
       console.log(error)
     })
-   };
+};
 
 function displayRecipe(data) {
     var recipeHolder = document.createElement("div");
     document.querySelector(".restaurants").appendChild(recipeHolder);
     var name = document.createElement("p");
-    name.textContent = data.meals[0].strMeal
+    name.textContent = data.meals[0].strMeal;
     recipeHolder.appendChild(name);
     var image = document.createElement("img");
-    image.setAttribute("src", data.meals[0].strMealThumb)
+    image.setAttribute("src", data.meals[0].strMealThumb);
     recipeHolder.appendChild(image);
     var link = document.createElement("a");
     link.textContent = data.meals[0].strSource;
     link.setAttribute("href", data.meals[0].strSource);
     recipeHolder.appendChild(link);
-}
+};
