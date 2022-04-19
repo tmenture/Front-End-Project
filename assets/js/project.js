@@ -13,13 +13,9 @@ function getUserLocation () {
     console.log("getMovie");
     getMovie(userZipCode);
 
-};
+}
 
 $(document).on("click", "#btn-t", function (event) {
-    event.preventDefault();
-    getLocation()
-    //callApi();
-
     getUserLocation();
 
 });
@@ -41,13 +37,6 @@ var callApi = function (userZipCode) {
 };
 
 var displayData = function (data) {
-    for (var i = 0; i < data._embedded.events.length; i++) {
-        const eventEl = data._embedded.events[i];
-        const eventElDiv = document.getElementById("fetch-container");
-        const event = eventEl.name;
-        const header = document.createElement("h1");
-        header.innerHTML = event;
-        eventElDiv.appendChild(header);
 
     if (!data._embedded) {
 
@@ -73,14 +62,6 @@ var displayData = function (data) {
     };
 };
 
-$(document).on("click", "#btn-t", function (event) {
-    getLocation();
-   // getWeather();
-   // getMovie();
-});
-
-function getWeather() {
-    let api = "https://api.openweathermap.org/data/2.5/weather?zip=08094,us&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
 function getWeather(userZipCode) {
     let api = "https://api.openweathermap.org/data/2.5/weather?zip="+ userZipCode +",us&units=imperial&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
     console.log(api)
@@ -200,5 +181,4 @@ function displayRecipe(data) {
     link.textContent = data.meals[0].strSource;
     link.setAttribute("href", data.meals[0].strSource);
     recipeHolder.appendChild(link);
-}}
-};
+}
