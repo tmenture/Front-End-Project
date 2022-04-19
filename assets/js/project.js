@@ -74,6 +74,7 @@ var displayData = function (data) { // The function that displays event informat
 
             const urlContainer = document.createElement("a");
             urlContainer.classList.add("box");
+            urlContainer.classList.add("has-background-light");
             urlContainer.classList.add("has-text-link");
             urlContainer.id = "event-link";
 
@@ -186,6 +187,7 @@ function displayMovies (data) {  // Displays information on the movies in theate
     for ( i = 0; i < data.length; i++) {
         var movie = document.createElement("p");
         movie.classList.add("box");
+        movie.classList.add("title");
         movie.classList.add("is-size-5");
         movie.textContent = data[i].title
         moviesHolder.appendChild(movie);
