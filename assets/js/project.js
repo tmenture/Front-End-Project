@@ -2,6 +2,7 @@ var lat = "";
 var lon = "";
 var theDate = moment().format("YYYY-MM-DD");
 console.log(theDate);
+var moviesHolder = document.createElement("div");
 
 function getUserLocation () {
     var userZipCode = document.getElementById("zip-code").value;
@@ -154,14 +155,27 @@ function getMovie(userZipCode) {
 };
 
 function displayMovies (data) {
-    var moviesHolder = document.createElement("div");
+    //var moviesHolder = document.createElement("div");
     document.querySelector(".movie").appendChild(moviesHolder);
-    for ( i = 0; i < data.length; i++) {
+    for (var i = 0; i < data.length; i++) {
         var movie = document.createElement("p");
         movie.textContent = data[i].title
         moviesHolder.appendChild(movie);
+       var showTimesArr = data[i].showtimes
+      displayTimes(showTimesArr)
     }
 };
+
+function displayTimes (showTimesArr){
+   // var timesHolder = document.createElement("div");
+    document.querySelector(".movie").appendChild(moviesHolder);
+   for (var i=0; i<showTimesArr.length; i++) {
+      var time = moment(showTimesArr[i].dateTime).format("LT")
+      var showTime = document.createElement("p");
+      showTime.textContent = time;
+      moviesHolder.appendChild(showTime);
+    };
+}
 
 $(document).on("click", "#btn-i", function (event) {
 
