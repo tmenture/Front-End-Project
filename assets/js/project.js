@@ -16,6 +16,8 @@ function getUserLocation () {
 }
 
 $(document).on("click", "#btn-t", function (event) {
+
+    
     getUserLocation();
 
 });
