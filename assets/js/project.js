@@ -82,7 +82,7 @@ $(document).on("click", "#btn-t", function (event) {
 function getWeather() {
     let api = "https://api.openweathermap.org/data/2.5/weather?zip=08094,us&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
 function getWeather(userZipCode) {
-    let api = "https://api.openweathermap.org/data/2.5/weather?zip="+ userZipCode +",us&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
+    let api = "https://api.openweathermap.org/data/2.5/weather?zip="+ userZipCode +",us&units=imperial&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
     console.log(api)
      fetch(api)
     .then(function(response){
@@ -138,6 +138,9 @@ function displayPlaces (data) {
         var name = document.createElement("p");
         name.textContent = data.results[i].poi.name
         placesHolder.appendChild(name);
+        var address = document.createElement("p");
+        address.textContent = data.results[i].address.freeformAddress
+        placesHolder.appendChild(address);
     }
 };
 
