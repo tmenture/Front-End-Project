@@ -155,8 +155,8 @@ function getMovie(userZipCode) {
 };
 
 function displayMovies (data) {
-    //var moviesHolder = document.createElement("div");
     document.querySelector(".movie").appendChild(moviesHolder);
+    moviesHolder.classList.add("row")
     for (var i = 0; i < data.length; i++) {
         var movie = document.createElement("p");
         movie.textContent = data[i].title
@@ -167,22 +167,14 @@ function displayMovies (data) {
 };
 
 function displayTimes (showTimesArr){
-   // var timesHolder = document.createElement("div");
-    document.querySelector(".movie").appendChild(moviesHolder);
    for (var i=0; i<showTimesArr.length; i++) {
       var time = moment(showTimesArr[i].dateTime).format("LT")
       var showTime = document.createElement("p");
       showTime.textContent = time;
+     // showTime.textContent = time + " " + showTimesArr[i].theatre.name;
       moviesHolder.appendChild(showTime);
     };
 }
-
-$(document).on("click", "#btn-i", function (event) {
-
-    event.preventDefault();
-    getRecipe();
-});
-
 
 function getRecipe() {
     let api = "https://www.themealdb.com/api/json/v1/1/random.php"
