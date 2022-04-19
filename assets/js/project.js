@@ -2,6 +2,7 @@ var lat = "";
 var lon = "";
 var theDate = moment().format("YYYY-MM-DD");  
 console.log(theDate);
+var moviesHolder = document.createElement("div");
 
 function getUserLocation () { // Function that grabs user inputted zip-code, and inserts it into the API calls to get event suggestions for the user
     var userZipCode = document.getElementById("zip-code").value;
@@ -184,13 +185,16 @@ function getMovie(userZipCode) {  // Pulls information on the movies in theaters
 function displayMovies (data) {  // Displays information on the movies in theaters near user zip-code
     var moviesHolder = document.createElement("div");
     document.querySelector(".movie").appendChild(moviesHolder);
-    for ( i = 0; i < data.length; i++) {
+    moviesHolder.classList.add("row")
+    for (var i = 0; i < data.length; i++) {
         var movie = document.createElement("p");
         movie.classList.add("box");
         movie.classList.add("title");
         movie.classList.add("is-size-5");
         movie.textContent = data[i].title
         moviesHolder.appendChild(movie);
+       var showTimesArr = data[i].showtimes
+      displayTimes(showTimesArr)
     }
 };
 
@@ -200,6 +204,15 @@ $(document).on("click", "#btn-i", function (event) {  // The listener attached t
 
 });
 
+function displayTimes (showTimesArr){
+   for (var i=0; i<showTimesArr.length; i++) {
+      var time = moment(showTimesArr[i].dateTime).format("LT")
+      var showTime = document.createElement("p");
+      showTime.textContent = time;
+     // showTime.textContent = time + " " + showTimesArr[i].theatre.name;
+      moviesHolder.appendChild(showTime);
+    };
+}
 
 function getRecipe() { // The API call to provide a recipie when user decides to stay in
     let api = "https://www.themealdb.com/api/json/v1/1/random.php"
