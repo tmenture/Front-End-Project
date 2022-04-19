@@ -1,9 +1,3 @@
-Calendly.initInlineWidget({
-    url: 'https://calendly.com/chris-williams83',
-    parentElement: document.getElementById('SAMPLEdivID'),
-    prefill: {},
-    utm: {}
-   });
 var lat = "";
 var lon = "";
 var theDate = moment().format("YYYY-MM-DD");
@@ -112,10 +106,10 @@ function displayWeather (data) {
     var icon = data.weather[0].icon;
     weatherImage.setAttribute("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
     dataHolder.appendChild(weatherImage);
-   var temp = document.createElement("p");
-   temp.textContent = ("Temperature " + data.main.temp + " °F");
-   dataHolder.appendChild(temp);
-   var humidity = document.createElement("p");
+    var temp = document.createElement("p");
+    temp.textContent = ("Temperature " + data.main.temp + " °F");
+    dataHolder.appendChild(temp);
+    var humidity = document.createElement("p");
     humidity.textContent = ("Humidity " + data.main.humidity + "%");
     dataHolder.appendChild(humidity);
     var windSpeed = document.createElement("p");
