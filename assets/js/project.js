@@ -140,6 +140,9 @@ function displayPlaces (data) {
         var name = document.createElement("p");
         name.textContent = data.results[i].poi.name
         placesHolder.appendChild(name);
+        var address = document.createElement("p");
+        address.textContent = data.results[i].address.freeformAddress
+        placesHolder.appendChild(address);
     }
 };
 
