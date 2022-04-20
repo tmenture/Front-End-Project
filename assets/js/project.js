@@ -212,13 +212,13 @@ function displayMovies (data) {  // Displays information on the movies in theate
         movie.textContent = data[i].title
         movie.classList.add("row")
         moviesHolder.appendChild(movie);
-       var newLine = document.createElement("div")
-       newLine.classList.add("is-flex")
-       newLine.classList.add("column")
-       newLine.classList.add("is-12")
-      moviesHolder.appendChild(newLine);
-       var showTimesArr = data[i].showtimes
-      displayTimes(showTimesArr)
+        var newLine = document.createElement("div")
+        newLine.classList.add("is-flex")
+        newLine.classList.add("column")
+        newLine.classList.add("is-12")
+        moviesHolder.appendChild(newLine);
+        var showTimesArr = data[i].showtimes;
+        displayTimes(showTimesArr);
     }
 };
 
