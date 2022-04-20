@@ -15,29 +15,20 @@ function getUserLocation () { // Function that grabs user inputted zip-code, and
 
 }
 
-<<<<<<< HEAD
 $(document).on("click", "#btn-t", function (event) {
     document.querySelector(".title-1").classList.remove("is-hidden")
     document.querySelector(".title-2").classList.remove("is-hidden")
     document.querySelector(".title-3").classList.remove("is-hidden")
-=======
-$(document).on("click", "#btn-t", function (event) {  // The listener attached to the night out button
-
->>>>>>> 9b7287e3da4f073cb1e22c97767878898c281b16
     getUserLocation();
 
 });
 
-<<<<<<< HEAD
 $(document).on("click", "#btn-i", function (event) {
     getRecipe();
 });
 
 
 var callApi = function (userZipCode) {
-=======
-var callApi = function (userZipCode) {  // The call API function that pulls the data from TicketMaster's API
->>>>>>> 9b7287e3da4f073cb1e22c97767878898c281b16
 
              fetch('https://app.ticketmaster.com/discovery/v2/events.json?postalCode=' + userZipCode + "&radius=50&unit=miles&apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R")
 
@@ -101,13 +92,7 @@ var displayData = function (data) { // The function that displays event informat
             urlContainer.innerHTML = eventUrl;
 
             header.innerHTML = event1;
-
-            // Need to fix this to load links in new tab, issue is it keeps loading the same link no matter which one is clicked
-            // 
-            // $(document).on("click", "#event-link", function(event) { 
-            //     window.open(urlContainer.text);
-            // });
-                
+  
             eventElDiv.appendChild(header);
 
             eventElDiv.appendChild(urlContainer);
@@ -115,6 +100,7 @@ var displayData = function (data) { // The function that displays event informat
         };
 
     };
+
 };
 
 function getWeather(userZipCode) {  // This pulls the weather information of the day a user decides they want to plan a night out
