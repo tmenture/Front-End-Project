@@ -186,7 +186,7 @@ function displayPlaces (data) {  // Displays the restaurants in radius of user i
 };
 
 function getMovie(userZipCode) {  // Pulls information on the movies in theaters near users inputted zip-code
-    let api = "https://data.tmsapi.com/v1.1/movies/showings?startDate=" +theDate+ "&zip="+ userZipCode +"&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
+    let api = "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +theDate+ "&zip="+ userZipCode +"&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
     fetch(api)
     .then(function(response){
         return response.json()
