@@ -17,11 +17,17 @@ function getUserLocation () {
 };
 
 $(document).on("click", "#btn-t", function (event) {
-
-    
+    document.querySelector(".title-1").classList.remove("is-hidden")
+    document.querySelector(".title-2").classList.remove("is-hidden")
+    document.querySelector(".title-3").classList.remove("is-hidden")
     getUserLocation();
 
 });
+
+$(document).on("click", "#btn-i", function (event) {
+    getRecipe();
+});
+
 
 var callApi = function (userZipCode) {
 
@@ -55,8 +61,11 @@ var callApi = function (userZipCode) {
 var displayData = function (data) {
 
     if (!data._embedded) {
+        var noEvent = document.createElement("p");
+        noEvent.textContent = ("No events near you, please try another zip code");
+        document.getElementById("fetch-container").appendChild(noEvent);
 
-        alert("No events near you, please try another zip code");
+        //alert("No events near you, please try another zip code");
 
     } else {
 
@@ -100,6 +109,11 @@ function displayWeather (data) {
     console.log(lon)
     var dataHolder = document.createElement("div");
     document.querySelector(".weather").appendChild(dataHolder)
+    var title = document.createElement("h4");
+    title.classList.add("is-size-4")
+    title.classList.add("has-text-weight-bold")
+    title.textContent = "Weather"
+    dataHolder.appendChild(title);
     var weatherImage = document.createElement("img");
     var icon = data.weather[0].icon;
     weatherImage.setAttribute("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
@@ -135,9 +149,11 @@ function displayPlaces (data) {
     for ( i = 0; i < data.results.length; i++) {
         var name = document.createElement("p");
         name.textContent = data.results[i].poi.name
+        name.classList.add("has-text-weight-semibold");
         placesHolder.appendChild(name);
         var address = document.createElement("p");
         address.textContent = data.results[i].address.freeformAddress
+        address.classList.add("has-text-weight-normal")
         placesHolder.appendChild(address);
     }
 };
@@ -158,10 +174,18 @@ function getMovie(userZipCode) {
 function displayMovies (data) {
     document.querySelector(".movie").appendChild(moviesHolder);
     moviesHolder.classList.add("row")
+    moviesHolder.classList.add("is-flex")
+    moviesHolder.classList.add("is-flex-wrap-wrap")
     for (var i = 0; i < data.length; i++) {
         var movie = document.createElement("p");
         movie.textContent = data[i].title
+        movie.classList.add("row")
         moviesHolder.appendChild(movie);
+       var newLine = document.createElement("div")
+       newLine.classList.add("is-flex")
+       newLine.classList.add("column")
+       newLine.classList.add("is-12")
+      moviesHolder.appendChild(newLine);
        var showTimesArr = data[i].showtimes
       displayTimes(showTimesArr)
     }
@@ -171,10 +195,17 @@ function displayTimes (showTimesArr){
    for (var i=0; i<showTimesArr.length; i++) {
       var time = moment(showTimesArr[i].dateTime).format("LT")
       var showTime = document.createElement("p");
+      showTime.classList.add("column")
+      showTime.classList.add("has-text-primary")
       showTime.textContent = time;
      // showTime.textContent = time + " " + showTimesArr[i].theatre.name;
       moviesHolder.appendChild(showTime);
     };
+    var newLine = document.createElement("div")
+    newLine.classList.add("is-flex")
+    newLine.classList.add("column")
+    newLine.classList.add("is-12")
+   moviesHolder.appendChild(newLine);
 }
 
 function getRecipe() {
@@ -192,13 +223,17 @@ function getRecipe() {
 
 function displayRecipe(data) {
     var recipeHolder = document.createElement("div");
-    document.querySelector(".restaurants").appendChild(recipeHolder);
+    document.querySelector(".food").appendChild(recipeHolder);
     var name = document.createElement("p");
     name.textContent = data.meals[0].strMeal;
+    name.classList.add("has-text-weight-bold")
+    name.classList.add("is-4")
     recipeHolder.appendChild(name);
     var image = document.createElement("img");
     image.setAttribute("src", data.meals[0].strMealThumb);
     recipeHolder.appendChild(image);
+    var newLine = document.createElement("br")
+    recipeHolder.appendChild(newLine);
     var link = document.createElement("a");
     link.textContent = data.meals[0].strSource;
     link.setAttribute("href", data.meals[0].strSource);
