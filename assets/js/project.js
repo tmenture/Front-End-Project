@@ -90,7 +90,9 @@ var displayData = function (data) { // The function that displays event informat
 
             header.innerHTML = event1;
 
-            
+            $(document).on("click", "#event-link", function (event) {
+                window.open(eventUrl, event1);
+            });
                 
             eventElDiv.appendChild(header);
 
