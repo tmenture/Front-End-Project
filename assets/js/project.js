@@ -1,7 +1,6 @@
 var lat = "";
 var lon = "";
 var theDate = moment().format("YYYY-MM-DD");  
-console.log(theDate);
 var moviesHolder = document.createElement("div");
 
 function getUserLocation () { // Function that grabs user inputted zip-code, and inserts it into the API calls to get event suggestions for the user
@@ -64,8 +63,6 @@ var displayData = function (data) { // The function that displays event informat
         noEvent.textContent = ("No events near you, please try another zip code");
         document.getElementById("fetch-container").appendChild(noEvent);
 
-        //alert("No events near you, please try another zip code");
-
     } else {
 
         for (var i = 0; i < data._embedded.events.length; i++) {
@@ -92,7 +89,9 @@ var displayData = function (data) { // The function that displays event informat
             urlContainer.innerHTML = eventUrl;
 
             header.innerHTML = event1;
-  
+
+            
+                
             eventElDiv.appendChild(header);
 
             eventElDiv.appendChild(urlContainer);
@@ -100,7 +99,6 @@ var displayData = function (data) { // The function that displays event informat
         };
 
     };
-
 };
 
 function getWeather(userZipCode) {  // This pulls the weather information of the day a user decides they want to plan a night out
@@ -108,13 +106,13 @@ function getWeather(userZipCode) {  // This pulls the weather information of the
     console.log(api)
      fetch(api)
     .then(function(response){
-       return response.json()
-   }).then(function(data){
-       console.log(data);
-     displayWeather(data);
-  }).catch(function(error){
-      console.log(error)
-    })
+        return response.json()
+    }).then(function(data){
+        console.log(data);
+        displayWeather(data);
+    }).catch(function(error){
+        console.log(error)
+    });
 };
 
 function displayWeather (data) {  // Displays the weather of the day a user plans a night out
@@ -146,16 +144,16 @@ function displayWeather (data) {  // Displays the weather of the day a user plan
 };
 
 function findPlaces(lat, lon) {  // Pulls information of local restaurants based on the zip code entered when user decides to plan a night out 
- let api = "https://api.tomtom.com/search/2/categorySearch/restaurant.json?limit=15&lat=" + lat + "&lon=" + lon + " &radius=1500&categorySet=7315&view=Unified&relatedPois=off&key=PzjekmmRa9kSFSHBIrAeRKeseuZATku4"
-  fetch(api)
-  .then(function(response){
-     return response.json()
- }).then(function(data){
-     console.log(data);
-     displayPlaces(data);
-}).catch(function(error){
-   console.log(error)
- })
+    let api = "https://api.tomtom.com/search/2/categorySearch/restaurant.json?limit=15&lat=" + lat + "&lon=" + lon + " &radius=1500&categorySet=7315&view=Unified&relatedPois=off&key=PzjekmmRa9kSFSHBIrAeRKeseuZATku4"
+    fetch(api)
+    .then(function(response){
+        return response.json()
+    }).then(function(data){
+        console.log(data);
+        displayPlaces(data);
+    }).catch(function(error){
+        console.log(error)
+    });
 };
 
 function displayPlaces (data) {  // Displays the restaurants in radius of user inputed zip-code
@@ -181,15 +179,15 @@ function displayPlaces (data) {  // Displays the restaurants in radius of user i
 };
 
 function getMovie(userZipCode) {  // Pulls information on the movies in theaters near users inputted zip-code
-    let api = "http://data.tmsapi.com/v1.1/movies/showings?startDate=" +theDate+ "&zip="+ userZipCode +"&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
+    let api = "https://data.tmsapi.com/v1.1/movies/showings?startDate=" +theDate+ "&zip="+ userZipCode +"&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
     fetch(api)
     .then(function(response){
         return response.json()
     }).then(function(data){
         console.log(data);
         displayMovies(data);
-   }).catch(function(error){
-      console.log(error)
+    }).catch(function(error){
+        console.log(error)
     })
 };
 
@@ -207,13 +205,13 @@ function displayMovies (data) {  // Displays information on the movies in theate
         movie.textContent = data[i].title
         movie.classList.add("row")
         moviesHolder.appendChild(movie);
-       var newLine = document.createElement("div")
-       newLine.classList.add("is-flex")
-       newLine.classList.add("column")
-       newLine.classList.add("is-12")
-      moviesHolder.appendChild(newLine);
-       var showTimesArr = data[i].showtimes
-      displayTimes(showTimesArr)
+        var newLine = document.createElement("div")
+        newLine.classList.add("is-flex")
+        newLine.classList.add("column")
+        newLine.classList.add("is-12")
+        moviesHolder.appendChild(newLine);
+        var showTimesArr = data[i].showtimes;
+        displayTimes(showTimesArr);
     }
 };
 
@@ -237,7 +235,7 @@ function displayTimes (showTimesArr){
     newLine.classList.add("is-flex")
     newLine.classList.add("column")
     newLine.classList.add("is-12")
-   moviesHolder.appendChild(newLine);
+    moviesHolder.appendChild(newLine);
 }
 
 function getRecipe() { // The API call to provide a recipie when user decides to stay in
@@ -248,7 +246,7 @@ function getRecipe() { // The API call to provide a recipie when user decides to
     }).then(function(data){
         console.log(data);
         displayRecipe(data);
-   }).catch(function(error){
+    }).catch(function(error){
       console.log(error)
     })
 };
@@ -270,4 +268,4 @@ function displayRecipe(data) { // The function that displays the recipe
     link.textContent = data.meals[0].strSource;
     link.setAttribute("href", data.meals[0].strSource);
     recipeHolder.appendChild(link);
-}
+};
