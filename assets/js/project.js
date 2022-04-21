@@ -29,7 +29,7 @@ $(document).on("click", "#btn-i", function (event) {
 
 var callApi = function (userZipCode) {
 
-             fetch('https://app.ticketmaster.com/discovery/v2/events.json?postalCode=' + userZipCode + "&radius=50&unit=miles&apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R")
+             fetch('https://app.ticketmaster.com/discovery/v2/events.json?postalCode=' + userZipCode + "&radius=50&unit=miles&size=15&apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R")
 
                 .then((response) => {
 
@@ -90,7 +90,7 @@ var displayData = function (data) { // The function that displays event informat
 
             header.innerHTML = event1;
 
-            $(document).on("click", "#event-link", function (event) {
+            $(document).on("click", "#event-link", function () {
                 window.open(eventUrl, event1);
             });
                 
