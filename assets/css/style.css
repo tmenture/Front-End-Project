@@ -1,6 +1,52 @@
-h2 {
+/* General styling for document */
+html {
+    height: 100%;
+}
+body {
+    background: linear-gradient(to right, #0af5cd35, #388ccc55);
+    min-height: 100%;
+}
+
+/* Headers */
+h2, h4 {
     background: linear-gradient(to right, #388ccc, #0af5cd);
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+}
+
+/* Launch page display */
+#zip-code {
+    height: 50px;
+}
+.zip {
+    text-align: center;
+}
+
+/* Weather styling */
+.weather {
+    justify-content: center;
+    margin: auto;
+}
+.wImg {
+    display: block;
+    margin: auto;
+}
+.weatherCard {
+    text-align: center;
+    width: 100%;
+}
+
+/* Media query for smaller mobile view */
+@media (max-width: 586px) {
+    .weather {
+        margin-bottom: 30px;
+    }
+    .zip, #btn-t, #btn-i {
+        display: flex;
+        margin: 10px auto;
+    }
+    .zip, #btn-i {
+        width: 185px;
+    }
 }

@@ -127,19 +127,24 @@ function displayWeather (data) {  // Displays the weather of the day a user plan
     var title = document.createElement("h4");
     title.classList.add("is-size-4")
     title.classList.add("has-text-weight-bold")
+    title.classList.add("has-text-centered")
     title.textContent = "Weather"
     dataHolder.appendChild(title);
     var weatherImage = document.createElement("img");
+    weatherImage.classList.add("wImg")
     var icon = data.weather[0].icon;
     weatherImage.setAttribute("src", "https://openweathermap.org/img/wn/" + icon + "@2x.png");
     dataHolder.appendChild(weatherImage);
     var temp = document.createElement("p");
+    temp.classList.add("weatherCard");
     temp.textContent = ("Temperature " + data.main.temp + " °F");
     dataHolder.appendChild(temp);
     var humidity = document.createElement("p");
+    humidity.classList.add("weatherCard");
     humidity.textContent = ("Humidity " + data.main.humidity + "%");
     dataHolder.appendChild(humidity);
     var windSpeed = document.createElement("p");
+    windSpeed.classList.add("weatherCard");
     windSpeed.textContent = ("Wind Speed " + data.wind.speed + "MPH");
     dataHolder.appendChild(windSpeed);
     findPlaces(lat, lon)
@@ -197,7 +202,6 @@ function displayMovies (data) {  // Displays information on the movies in theate
     var moviesHolder = document.createElement("div");
     document.querySelector(".movie").appendChild(moviesHolder);
     moviesHolder.classList.add("row")
-    moviesHolder.classList.add("is-flex")
     moviesHolder.classList.add("is-flex-wrap-wrap")
     for (var i = 0; i < data.length; i++) {
         var movie = document.createElement("p");
