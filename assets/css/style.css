@@ -23,10 +23,12 @@ h2, h4 {
     text-align: center;
 }
 
+/* Night Out Stylings */
+
 /* Weather styling */
 .weather {
     justify-content: center;
-    margin: auto;
+    margin: auto auto 30px auto;
 }
 .wImg {
     display: block;
@@ -40,7 +42,19 @@ h2, h4 {
     background: none;
 }
 
-
+/* Night In Stylings */
+.recipeName {
+    margin: auto;
+    text-align: center;
+}
+.recipeImage {
+    display: block;
+    margin: auto;
+}
+.recipeLink {
+    margin: auto;
+    text-align: center;
+}
 
 /* Media query for smaller mobile view */
 @media (max-width: 586px) {

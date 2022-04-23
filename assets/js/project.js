@@ -21,6 +21,8 @@ $(document).on("click", "#btn-t", function (event) {
     document.querySelector(".columns").classList.remove("is-hidden")
     document.querySelector(".weather").classList.remove("is-hidden")
     document.querySelector(".food").classList.add("is-hidden")
+    document.querySelector(".zip").classList.add("is-hidden")
+    document.querySelector("#btn-t").classList.add("is-hidden")
     getUserLocation();
 
 });
@@ -29,6 +31,7 @@ $(document).on("click", "#btn-i", function (event) {
     document.querySelector(".columns").classList.add("is-hidden")
     document.querySelector(".weather").classList.add("is-hidden")
     document.querySelector(".food").classList.remove("is-hidden")
+    document.querySelector("#btn-i").classList.add("is-hidden")
     getRecipe();
 });
 
@@ -228,12 +231,6 @@ function displayMovies (data) {  // Displays information on the movies in theate
     }
 };
 
-// $(document).on("click", "#btn-i", function (event) {  // The listener attached to the night in button 
-
-//     getRecipe();
-
-// });
-
 function displayTimes (showTimesArr){
    for (var i=0; i<showTimesArr.length; i++) {
       var time = moment(showTimesArr[i].dateTime).format("LT")
@@ -271,14 +268,19 @@ function displayRecipe(data) { // The function that displays the recipe
     name.textContent = data.meals[0].strMeal;
     name.classList.add("has-text-weight-bold")
     name.classList.add("is-4")
+    name.classList.add("recipeName");
     recipeHolder.appendChild(name);
     var image = document.createElement("img");
+    image.classList.add("recipeImage");
     image.setAttribute("src", data.meals[0].strMealThumb);
     recipeHolder.appendChild(image);
-    var newLine = document.createElement("br")
-    recipeHolder.appendChild(newLine);
-    var link = document.createElement("a");
-    link.textContent = data.meals[0].strSource;
+    const link = document.createElement("a");
     link.setAttribute("href", data.meals[0].strSource);
-    recipeHolder.appendChild(link);
+    link.classList.add("has-text-link")
+    link.id="recipe-link";
+    for (i=0; i<data.meals[0].strSource[i].length; i++) {
+        $(document).on("click", ".recipeImage", function() {
+            window.open(data.meals[0].strSource);
+        });
+    }
 };
