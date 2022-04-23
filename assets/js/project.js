@@ -18,11 +18,17 @@ $(document).on("click", "#btn-t", function (event) {
     document.querySelector(".title-1").classList.remove("is-hidden")
     document.querySelector(".title-2").classList.remove("is-hidden")
     document.querySelector(".title-3").classList.remove("is-hidden")
+    document.querySelector(".columns").classList.remove("is-hidden")
+    document.querySelector(".weather").classList.remove("is-hidden")
+    document.querySelector(".food").classList.add("is-hidden")
     getUserLocation();
 
 });
 
 $(document).on("click", "#btn-i", function (event) {
+    document.querySelector(".columns").classList.add("is-hidden")
+    document.querySelector(".weather").classList.add("is-hidden")
+    document.querySelector(".food").classList.remove("is-hidden")
     getRecipe();
 });
 
@@ -123,7 +129,7 @@ function displayWeather (data) {  // Displays the weather of the day a user plan
     console.log(lat)
     console.log(lon)
     var dataHolder = document.createElement("div");
-    document.querySelector(".weather").appendChild(dataHolder)
+    document.querySelector(".weather").appendChild(dataHolder);
     var title = document.createElement("h4");
     title.classList.add("is-size-4")
     title.classList.add("has-text-weight-bold")
@@ -178,7 +184,7 @@ function displayPlaces (data) {  // Displays the restaurants in radius of user i
         address.classList.add("box");
         address.classList.add("has-background-light");
         address.classList.add("is-size-6");
-        address.classList.add("has-text-primary");
+        address.classList.add("has-text-info");
         address.textContent = data.results[i].address.freeformAddress
         address.classList.add("has-text-weight-normal")
         placesHolder.appendChild(address);
@@ -210,6 +216,7 @@ function displayMovies (data) {  // Displays information on the movies in theate
         movie.classList.add("is-size-5");
         movie.textContent = data[i].title
         movie.classList.add("row")
+        movie.classList.add("has-background-light")
         moviesHolder.appendChild(movie);
         var newLine = document.createElement("div")
         newLine.classList.add("is-flex")
@@ -221,11 +228,11 @@ function displayMovies (data) {  // Displays information on the movies in theate
     }
 };
 
-$(document).on("click", "#btn-i", function (event) {  // The listener attached to the night in button 
+// $(document).on("click", "#btn-i", function (event) {  // The listener attached to the night in button 
 
-    getRecipe();
+//     getRecipe();
 
-});
+// });
 
 function displayTimes (showTimesArr){
    for (var i=0; i<showTimesArr.length; i++) {
@@ -244,7 +251,7 @@ function displayTimes (showTimesArr){
     moviesHolder.appendChild(newLine);
 }
 
-function getRecipe() { // The API call to provide a recipie when user decides to stay in
+function getRecipe() { // The API call to provide a recipe when user decides to stay in
     let api = "https://www.themealdb.com/api/json/v1/1/random.php"
      fetch(api)
      .then(function(response){
