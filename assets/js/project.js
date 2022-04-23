@@ -1,7 +1,6 @@
 var lat = "";
 var lon = "";
 var theDate = moment().format("YYYY-MM-DD");  
-console.log(theDate);
 var moviesHolder = document.createElement("div");
 
 function getUserLocation () { // Function that grabs user inputted zip-code, and inserts it into the API calls to get event suggestions for the user
@@ -30,7 +29,7 @@ $(document).on("click", "#btn-i", function (event) {
 
 var callApi = function (userZipCode) {
 
-             fetch('https://app.ticketmaster.com/discovery/v2/events.json?postalCode=' + userZipCode + "&radius=50&unit=miles&apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R")
+             fetch('https://app.ticketmaster.com/discovery/v2/events.json?postalCode=' + userZipCode + "&radius=50&unit=miles&size=15&apikey=u0qeyJGVcW318hNAeQdpuAQrDfoV5v5R")
 
                 .then((response) => {
 
@@ -64,8 +63,6 @@ var displayData = function (data) { // The function that displays event informat
         noEvent.textContent = ("No events near you, please try another zip code");
         document.getElementById("fetch-container").appendChild(noEvent);
 
-        //alert("No events near you, please try another zip code");
-
     } else {
 
         for (var i = 0; i < data._embedded.events.length; i++) {
@@ -93,11 +90,9 @@ var displayData = function (data) { // The function that displays event informat
 
             header.innerHTML = event1;
 
-            // Need to fix this to load links in new tab, issue is it keeps loading the same link no matter which one is clicked
-            // 
-            // $(document).on("click", "#event-link", function(event) { 
-            //     window.open(urlContainer.text);
-            // });
+            $(document).on("click", "#event-link", function () {
+                window.open(eventUrl, event1);
+            });
                 
             eventElDiv.appendChild(header);
 
@@ -113,13 +108,13 @@ function getWeather(userZipCode) {  // This pulls the weather information of the
     console.log(api)
      fetch(api)
     .then(function(response){
-       return response.json()
-   }).then(function(data){
-       console.log(data);
-     displayWeather(data);
-  }).catch(function(error){
-      console.log(error)
-    })
+        return response.json()
+    }).then(function(data){
+        console.log(data);
+        displayWeather(data);
+    }).catch(function(error){
+        console.log(error)
+    });
 };
 
 function displayWeather (data) {  // Displays the weather of the day a user plans a night out
@@ -151,16 +146,16 @@ function displayWeather (data) {  // Displays the weather of the day a user plan
 };
 
 function findPlaces(lat, lon) {  // Pulls information of local restaurants based on the zip code entered when user decides to plan a night out 
- let api = "https://api.tomtom.com/search/2/categorySearch/restaurant.json?limit=15&lat=" + lat + "&lon=" + lon + " &radius=1500&categorySet=7315&view=Unified&relatedPois=off&key=PzjekmmRa9kSFSHBIrAeRKeseuZATku4"
-  fetch(api)
-  .then(function(response){
-     return response.json()
- }).then(function(data){
-     console.log(data);
-     displayPlaces(data);
-}).catch(function(error){
-   console.log(error)
- })
+    let api = "https://api.tomtom.com/search/2/categorySearch/restaurant.json?limit=15&lat=" + lat + "&lon=" + lon + " &radius=1500&categorySet=7315&view=Unified&relatedPois=off&key=PzjekmmRa9kSFSHBIrAeRKeseuZATku4"
+    fetch(api)
+    .then(function(response){
+        return response.json()
+    }).then(function(data){
+        console.log(data);
+        displayPlaces(data);
+    }).catch(function(error){
+        console.log(error)
+    });
 };
 
 function displayPlaces (data) {  // Displays the restaurants in radius of user inputed zip-code
@@ -193,8 +188,8 @@ function getMovie(userZipCode) {  // Pulls information on the movies in theaters
     }).then(function(data){
         console.log(data);
         displayMovies(data);
-   }).catch(function(error){
-      console.log(error)
+    }).catch(function(error){
+        console.log(error)
     })
 };
 
@@ -242,7 +237,7 @@ function displayTimes (showTimesArr){
     newLine.classList.add("is-flex")
     newLine.classList.add("column")
     newLine.classList.add("is-12")
-   moviesHolder.appendChild(newLine);
+    moviesHolder.appendChild(newLine);
 }
 
 function getRecipe() { // The API call to provide a recipie when user decides to stay in
@@ -253,7 +248,7 @@ function getRecipe() { // The API call to provide a recipie when user decides to
     }).then(function(data){
         console.log(data);
         displayRecipe(data);
-   }).catch(function(error){
+    }).catch(function(error){
       console.log(error)
     })
 };
