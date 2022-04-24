@@ -44,9 +44,7 @@ h2, h4 {
     outline: none;
     background: none;
 }
-/* #fetch-container {
-    width: 65%;
-} */
+
 /* Night In Stylings */
 .recipeName {
     margin: auto;
@@ -81,9 +79,3 @@ h2, h4 {
         justify-content: center;
     }
 }
-/* @media screen and (max-width: 769px) {
-    .events, .places, .movies {
-       
-    }
-    
-} */
