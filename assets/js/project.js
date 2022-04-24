@@ -55,7 +55,7 @@ var callApi = function (userZipCode) {
 
                 .then(data => {
 
-                //console.log(data);
+                console.log(data);
 
                 displayData(data);
 
@@ -114,15 +114,15 @@ var displayData = function (data) { // The function that displays event informat
 
 function getWeather(userZipCode) {  // This pulls the weather information of the day a user decides they want to plan a night out
     let api = "https://api.openweathermap.org/data/2.5/weather?zip="+ userZipCode +",us&units=imperial&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
-    //console.log(api)
+    console.log(api)
      fetch(api)
     .then(function(response){
         return response.json()
     }).then(function(data){
-        //console.log(data);
+        console.log(data);
         displayWeather(data);
     }).catch(function(error){
-        //console.log(error)
+        console.log(error)
     });
 };
 
@@ -165,10 +165,10 @@ function findPlaces(lat, lon) {  // Pulls information of local restaurants based
     .then(function(response){
         return response.json()
     }).then(function(data){
-        //console.log(data);
+        console.log(data);
         displayPlaces(data);
     }).catch(function(error){
-        //console.log(error)
+        console.log(error)
     });
 };
 
@@ -201,10 +201,10 @@ function getMovie(userZipCode) {  // Pulls information on the movies in theaters
     .then(function(response){
         return response.json()
     }).then(function(data){
-        //console.log(data);
+        console.log(data);
         displayMovies(data);
     }).catch(function(error){
-        //console.log(error)
+        console.log(error)
     })
 };
 
@@ -212,77 +212,36 @@ function displayMovies (data) {  // Displays information on the movies in theate
     var moviesHolder = document.createElement("div");
     moviesHolder.classList.add("toWatch");
     document.querySelector(".movie").appendChild(moviesHolder);
-    //moviesHolder.classList.add("row")
-    //moviesHolder.classList.add("is-flex-wrap-wrap")
     for (var i = 0; i < data.length; i++) {
         var movie = document.createElement("p");
         movie.classList.add("title");
         movie.classList.add("is-size-5");
         movie.textContent = data[i].title
         moviesHolder.appendChild(movie);
-        var runTime = document.createElement("p");
-        runTime.classList.add("box");
-        runTime.classList.add("is-size-6");
-        runTime.classList.add("has-background-light");
-        runTime.classList.add("has-text-info");
-        runTime.textContent = data[i].runTime;
-        console.log(data[i].runTime);
-        runTime.classList.add("has-text-weight-normal")
-        moviesHolder.appendChild(runTime);
+        var description = document.createElement("p");
+        description.classList.add("description");
+        description.classList.add("box");
+        description.classList.add("is-size-6");
+        description.classList.add("has-background-light");
+        description.classList.add("has-text-info");
+        description.textContent = data[i].shortDescription;
+        console.log(data[i].shortDescription);
+        description.classList.add("has-text-weight-normal")
+        moviesHolder.appendChild(description);
 
-        if (!runTime.textContent) {
-            var noRun = document.createElement("p");
-            noRun.classList.add("box")
-            noRun.textContent = ("No runtime available");
-            moviesHolder.appendChild(noRun);
+        if (!description.textContent) {
+            var noDescription = document.createElement("p");
+            noDescription.classList.add("no-description")
+            noDescription.classList.add("box")
+            noDescription.classList.add("has-background-light");
+            noDescription.textContent = ("No description available");
+            moviesHolder.appendChild(noDescription);
+        }
+        if (description.textContent == "") {
+            description.classList.add("is-hidden");
         }
     }
 };
-
-// function getTimes(userZipCode) {
-//     let api = "https://data.tmsapi.com/v1.1/movies:movieId/showings?startDate=" +theDate+ "&zip"+ userZipCode +"&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
-//     fetch(api)
-//     .then(function(response) {
-//         return response.json()
-//     }).then(function(data) {
-//         displayTimes(data);
-//     }).catch(function(error) {
-//         console.log(error);
-//     })
-// };
-// function displayTimes (data) {
-//     var timesHolder = document.createElement("div");
-//     timesHolder.classList.add("toSee");
-//     document.querySelector(".times").appendChild(movie);
-//     for (var i=0; i < data.length; i++) {
-//         var times = document.createElement("p");
-//         times.classList.add("box")
-//         times.classList.add("has-background-light")
-//         times.classList.add("is-size-6")
-//         times.classList.add("has-text-info")
-//         times.textContent = data.results[i].showtimes.theatre;
-//         times.classList.add("has-text-weight-normal")
-//         movie.appendChild(times);
-//     }
-// }
-// function displayTimes (showTimesArr){
-//    for (var i=0; i<showTimesArr.length; i++) {
-//       var time = moment(showTimesArr[i].dateTime).format("LT")
-//       var showTime = document.createElement("p");
-//       showTime.classList.add("column")
-//       showTime.classList.add("has-text-primary")
-//       showTime.classList.add("box");
-//       showTime.classList.add("has-background-light");
-//       showTime.textContent = time;
-//       showTime.textContent = time + " " + showTimesArr[i].theatre.name;
-//       moviesHolder.appendChild(showTime);
-//     };
-    // var newLine = document.createElement("div")
-    // newLine.classList.add("is-flex")
-    // newLine.classList.add("column")
-    // newLine.classList.add("is-12")
-    // moviesHolder.appendChild(newLine);
-// }
 
 function getRecipe() { // The API call to provide a recipe when user decides to stay in
     let api = "https://www.themealdb.com/api/json/v1/1/random.php"
@@ -290,10 +249,10 @@ function getRecipe() { // The API call to provide a recipe when user decides to 
      .then(function(response){
         return response.json()
     }).then(function(data){
-        //console.log(data);
+        console.log(data);
         displayRecipe(data);
     }).catch(function(error){
-      //console.log(error)
+      console.log(error)
     })
 };
 
