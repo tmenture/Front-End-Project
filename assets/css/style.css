@@ -1,6 +1,81 @@
-h2 {
+/* General styling for document */
+html {
+    height: 100%;
+}
+body {
+    background: linear-gradient(to right, #0af5cd35, #388ccc55);
+    min-height: 100%;
+}
+
+/* Headers */
+h2, h4 {
     background: linear-gradient(to right, #388ccc, #0af5cd);
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+/* Launch page display */
+#zip-code {
+    height: 50px;
+}
+.zip {
+    text-align: center;
+}
+
+/* Night Out Stylings */
+
+/* Weather styling */
+.weather {
+    justify-content: center;
+    margin: auto auto 30px auto;
+}
+.wImg {
+    display: block;
+    margin: auto;
+}
+.weatherCard {
+    text-align: center;
+    width: 100%;
+}
+
+#fetch-container, .toEat {
+    outline: none;
+    background: none;
+}
+
+/* Night In Stylings */
+.recipeName {
+    margin: auto;
+    text-align: center;
+}
+.recipeImage {
+    display: block;
+    margin: auto;
+}
+.recipeLink {
+    margin: auto;
+    text-align: center;
+}
+
+/* Media query for smaller mobile view */
+@media screen and (max-width: 586px) {
+    .weather {
+        margin-bottom: 30px;
+    }
+    .zip, #btn-t, #btn-i {
+        display: flex;
+        margin: 10px auto;
+    }
+    .zip, #btn-i {
+        width: 185px;
+    }
+    .restAdd {
+        padding-right: 150px;
+    }
+    .events, .places, .movies {
+        margin: auto;
+        justify-content: center;
+    }
 }
