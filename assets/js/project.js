@@ -55,7 +55,7 @@ var callApi = function (userZipCode) {
 
                 .then(data => {
 
-                console.log(data);
+                //console.log(data);
 
                 displayData(data);
 
@@ -79,11 +79,11 @@ var displayData = function (data) { // The function that displays event informat
             const eventEl = data._embedded.events[i];
 
             const eventElDiv = document.getElementById("fetch-container");
-            eventElDiv.classList.add("box");
+            eventElDiv.classList.add("div");
 
             const event1 = eventEl.name;
 
-            const header = document.createElement("h1");
+            const header = document.createElement("p");
             header.classList.add("title");
             header.classList.add("is-5");
 
@@ -114,15 +114,15 @@ var displayData = function (data) { // The function that displays event informat
 
 function getWeather(userZipCode) {  // This pulls the weather information of the day a user decides they want to plan a night out
     let api = "https://api.openweathermap.org/data/2.5/weather?zip="+ userZipCode +",us&units=imperial&appid=3b91a5e54ccda9fd842e775f32c6e9ad"
-    console.log(api)
+    //console.log(api)
      fetch(api)
     .then(function(response){
         return response.json()
     }).then(function(data){
-        console.log(data);
+        //console.log(data);
         displayWeather(data);
     }).catch(function(error){
-        console.log(error)
+        //console.log(error)
     });
 };
 
@@ -165,26 +165,27 @@ function findPlaces(lat, lon) {  // Pulls information of local restaurants based
     .then(function(response){
         return response.json()
     }).then(function(data){
-        console.log(data);
+        //console.log(data);
         displayPlaces(data);
     }).catch(function(error){
-        console.log(error)
+        //console.log(error)
     });
 };
 
 function displayPlaces (data) {  // Displays the restaurants in radius of user inputed zip-code
     var placesHolder = document.createElement("div");
-    placesHolder.classList.add("box");
+    placesHolder.classList.add("toEat")
     document.querySelector(".restaurants").appendChild(placesHolder);
     for ( i = 0; i < data.results.length; i++) {
         var name = document.createElement("p");
         name.classList.add("title");
-        name.classList.add("is-5");
+        name.classList.add("is-size-5");
         name.textContent = data.results[i].poi.name
         name.classList.add("has-text-weight-semibold");
         placesHolder.appendChild(name);
         var address = document.createElement("p");
         address.classList.add("box");
+        address.classList.add("restAdd");
         address.classList.add("has-background-light");
         address.classList.add("is-size-6");
         address.classList.add("has-text-info");
@@ -200,53 +201,88 @@ function getMovie(userZipCode) {  // Pulls information on the movies in theaters
     .then(function(response){
         return response.json()
     }).then(function(data){
-        console.log(data);
+        //console.log(data);
         displayMovies(data);
     }).catch(function(error){
-        console.log(error)
+        //console.log(error)
     })
 };
 
 function displayMovies (data) {  // Displays information on the movies in theaters near user zip-code
     var moviesHolder = document.createElement("div");
+    moviesHolder.classList.add("toWatch");
     document.querySelector(".movie").appendChild(moviesHolder);
-    moviesHolder.classList.add("row")
-    moviesHolder.classList.add("is-flex-wrap-wrap")
+    //moviesHolder.classList.add("row")
+    //moviesHolder.classList.add("is-flex-wrap-wrap")
     for (var i = 0; i < data.length; i++) {
         var movie = document.createElement("p");
-        movie.classList.add("box");
         movie.classList.add("title");
         movie.classList.add("is-size-5");
         movie.textContent = data[i].title
-        movie.classList.add("row")
-        movie.classList.add("has-background-light")
         moviesHolder.appendChild(movie);
-        var newLine = document.createElement("div")
-        newLine.classList.add("is-flex")
-        newLine.classList.add("column")
-        newLine.classList.add("is-12")
-        moviesHolder.appendChild(newLine);
-        var showTimesArr = data[i].showtimes;
-        displayTimes(showTimesArr);
+        var runTime = document.createElement("p");
+        runTime.classList.add("box");
+        runTime.classList.add("is-size-6");
+        runTime.classList.add("has-background-light");
+        runTime.classList.add("has-text-info");
+        runTime.textContent = data[i].runTime;
+        console.log(data[i].runTime);
+        runTime.classList.add("has-text-weight-normal")
+        moviesHolder.appendChild(runTime);
+
+        if (!runTime.textContent) {
+            var noRun = document.createElement("p");
+            noRun.classList.add("box")
+            noRun.textContent = ("No runtime available");
+            moviesHolder.appendChild(noRun);
+        }
     }
 };
 
-function displayTimes (showTimesArr){
-   for (var i=0; i<showTimesArr.length; i++) {
-      var time = moment(showTimesArr[i].dateTime).format("LT")
-      var showTime = document.createElement("p");
-      showTime.classList.add("column")
-      showTime.classList.add("has-text-primary")
-      showTime.textContent = time;
-     // showTime.textContent = time + " " + showTimesArr[i].theatre.name;
-      moviesHolder.appendChild(showTime);
-    };
-    var newLine = document.createElement("div")
-    newLine.classList.add("is-flex")
-    newLine.classList.add("column")
-    newLine.classList.add("is-12")
-    moviesHolder.appendChild(newLine);
-}
+// function getTimes(userZipCode) {
+//     let api = "https://data.tmsapi.com/v1.1/movies:movieId/showings?startDate=" +theDate+ "&zip"+ userZipCode +"&radius=15&api_key=r7ygr6gd9bm5gbhycd4acqyw"
+//     fetch(api)
+//     .then(function(response) {
+//         return response.json()
+//     }).then(function(data) {
+//         displayTimes(data);
+//     }).catch(function(error) {
+//         console.log(error);
+//     })
+// };
+// function displayTimes (data) {
+//     var timesHolder = document.createElement("div");
+//     timesHolder.classList.add("toSee");
+//     document.querySelector(".times").appendChild(movie);
+//     for (var i=0; i < data.length; i++) {
+//         var times = document.createElement("p");
+//         times.classList.add("box")
+//         times.classList.add("has-background-light")
+//         times.classList.add("is-size-6")
+//         times.classList.add("has-text-info")
+//         times.textContent = data.results[i].showtimes.theatre;
+//         times.classList.add("has-text-weight-normal")
+//         movie.appendChild(times);
+//     }
+// }
+// function displayTimes (showTimesArr){
+//    for (var i=0; i<showTimesArr.length; i++) {
+//       var time = moment(showTimesArr[i].dateTime).format("LT")
+//       var showTime = document.createElement("p");
+//       showTime.classList.add("column")
+//       showTime.classList.add("has-text-primary")
+//       showTime.classList.add("box");
+//       showTime.classList.add("has-background-light");
+//       showTime.textContent = time;
+//       showTime.textContent = time + " " + showTimesArr[i].theatre.name;
+//       moviesHolder.appendChild(showTime);
+//     };
+    // var newLine = document.createElement("div")
+    // newLine.classList.add("is-flex")
+    // newLine.classList.add("column")
+    // newLine.classList.add("is-12")
+    // moviesHolder.appendChild(newLine);
+// }
 
 function getRecipe() { // The API call to provide a recipe when user decides to stay in
     let api = "https://www.themealdb.com/api/json/v1/1/random.php"
@@ -254,10 +290,10 @@ function getRecipe() { // The API call to provide a recipe when user decides to 
      .then(function(response){
         return response.json()
     }).then(function(data){
-        console.log(data);
+        //console.log(data);
         displayRecipe(data);
     }).catch(function(error){
-      console.log(error)
+      //console.log(error)
     })
 };
 

@@ -13,6 +13,7 @@ h2, h4 {
     background-clip: border-box;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-align: center;
 }
 
 /* Launch page display */
@@ -38,10 +39,14 @@ h2, h4 {
     text-align: center;
     width: 100%;
 }
-.box {
+
+#fetch-container, .toEat {
+    outline: none;
     background: none;
 }
-
+/* #fetch-container {
+    width: 65%;
+} */
 /* Night In Stylings */
 .recipeName {
     margin: auto;
@@ -57,7 +62,7 @@ h2, h4 {
 }
 
 /* Media query for smaller mobile view */
-@media (max-width: 586px) {
+@media screen and (max-width: 586px) {
     .weather {
         margin-bottom: 30px;
     }
@@ -68,4 +73,17 @@ h2, h4 {
     .zip, #btn-i {
         width: 185px;
     }
+    .restAdd {
+        padding-right: 150px;
+    }
+    .events, .places, .movies {
+        margin: auto;
+        justify-content: center;
+    }
 }
+/* @media screen and (max-width: 769px) {
+    .events, .places, .movies {
+       
+    }
+    
+} */
